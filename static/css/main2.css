@@ -1,0 +1,338 @@
+*{
+    box-sizing: border-box;
+    font-size: 20px;
+}
+
+html, body{
+    margin: 0;
+    padding : 0;
+    font-family: -apple-system,BlinkMacSystemFont,"Malgun Gothic","맑은 고딕",helvetica,"Apple SD Gothic Neo",sans-serif;
+}
+
+main{
+    background-color: rgb(245, 245, 245);
+    height: auto;
+}
+
+#main_center {
+    margin: 0 auto;
+    width: 1080px;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+.center-align {
+    margin: 0 auto;
+    width: 1080px;
+    
+}
+#nav {
+    box-shadow: 0px 2px 3px rgba(0,0,0,0.3);
+}
+
+
+#logo{
+    margin: 0 auto;
+}
+.footer{
+    background-color : #dadada;
+    bottom : 0px;
+    text-align: center;
+    width:1080px;
+    margin:0 auto;
+}
+
+.footer h5{
+    margin : 0;
+}
+#mail {
+    display: inline-block;
+    width: 1080px;
+    height: 70px;
+    background-color: #6c05e2;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    text-align: center;
+    color: white;
+    margin: 0 auto;
+    margin-top: 30px;
+    font-size: 30px;
+}
+
+#fixed span{
+    color:aliceblue;
+    display : inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+div#header_search {
+    box-shadow: 0 5px 5px rgba(0,0,0,0.3);
+    height: 350px;
+}
+
+#header_search a h1 {
+    background-image: url(../image/logo.png);
+    background-repeat: no-repeat;
+    width: 411px;
+    height: 77px;
+    background-position: -172px -191px;
+    background-size: 600px 480px;
+    /* display: inline-block; */
+    margin: 0 auto;
+    position: relative;
+    margin-top: 100px;
+    margin-bottom: 100px;
+}
+
+#header_search a{
+    text-decoration: none;
+    vertical-align: middle;
+}
+#header_search a h1 span{
+    display: none;
+}
+
+#header_search fieldset {
+    margin: 0 auto;
+    padding: 12px 0px 12px 10px;
+    border: 2px solid #6c05e2;
+    width: 900px;
+    height: 100px;
+    /* display: inline-block; */
+    vertical-align: middle;
+    position: relative;
+    font-size: 40px;
+}
+
+input[type="username"], input[type="password"] {
+    width: 800px;
+    height: 100px;
+    font-size: 40px;
+    display: inline-block;
+    border: none;
+    padding: 0;
+    outline: none;
+    vertical-align: top;
+}
+
+.input {
+    margin: 0 auto;
+    margin-bottom: 10px;
+    /* padding: 12px 0px 12px 10px; */
+    border: 2px solid #6c05e2;
+    width: 900px;
+    height: 130px;
+    /* display: inline-block; */
+    vertical-align: middle;
+    /* position: relative; */
+    font-size: 40px;
+}
+
+#field{
+    margin: 0 auto;
+    padding: 12px 0px 12px 10px;
+    border: 3px solid white;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 19px rgba(0,0,0,0.3);
+    width: 1000px;
+    height: 500px;
+    /* display: inline-block; */
+    vertical-align: middle;
+    position: relative;
+    background-color: white;
+    
+}
+
+#field2{
+    margin: 0 auto;
+    padding: 12px 0px 12px 10px;
+    border: 3px solid white;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 19px rgba(0,0,0,0.3);
+    width: 1000px;
+    height: 200px;
+    /* display: inline-block; */
+    vertical-align: middle;
+    position: relative;
+    background-color: white;
+    
+}
+.profile{
+    display: inline-block;
+}
+
+.profile2{
+    display: inline-block;
+    width:150px;
+    height:150px;
+    position: relative;
+    bottom: 40px;
+}
+
+.profile button {
+    box-shadow: 0px 0px 7px rgba(0,0,0,0.3);
+    background-color: white;
+    border: 2px solid white;
+    border-radius: 20px;
+    height: 60px;
+    width: 700px;
+}
+
+.profile h3 {
+    font-size: 40px;
+    margin: 20px 0px 20px 20px;
+}
+
+.profile2 img {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    left: 10px;
+    top: 10px;
+    border-radius:100px;
+}
+.alert{
+    margin: 0 auto;
+    margin-bottom : 20px;
+    border: 22px solid white;
+    border-radius: 1rem;
+    width: 1000px;
+    box-shadow: 5px 5px 19px rgba(0,0,0,0.3);
+    background: white;
+    margin-top: 40px;
+}
+.lb{
+    width: 450px;
+    height: 50px;
+    border: none;
+    padding: 0;
+    background: #6c05e2;
+    border-radius: 1rem;
+    position: absolute;
+    bottom: 10px;
+    left: 30px;
+    color: white;
+}
+
+.rb{
+    width: 450px;
+    height: 50px;
+    border: none;
+    padding: 0;
+    background: #6c05e2;
+    border-radius: 1rem;
+    position: absolute;
+    bottom: 10px;
+    right: 30px;
+    color: white;
+}
+
+.rb a{
+    color: white;
+    text-align:middle;
+}
+
+
+#header_search fieldset button{
+    width: 100px;
+    height: 100px;
+    border: none;
+    padding: 0;
+    background: #6c05e2;
+    position: absolute;
+    right: -2px;
+    top: -2px;
+}
+
+#header_search fieldset .search-image{
+    background-image: url(../image/sp_search.png);
+    background-position: -3px -120px;
+    background-repeat: no-repeat;
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+    margin: 26px;
+    background-size: 416px 170px;
+}
+#header_search fieldset input {
+    border: none;
+    padding: 0;
+    outline: none;
+    width: 550px;
+    height: 48px;
+    display: inline-block;
+    /* vertical-align: middle; */
+    margin: 15px 0px 0px 0px;
+    font-size: 30px;
+}
+
+.ulist{
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+.ulist li {
+    display: inline-block;
+}
+.ulist{
+    margin:0;
+    padding:0;
+    list-style: none;
+    background-color: rgb(245,245,245)
+}
+.ulist li {
+    display: inline-block;
+}
+.ulist li .licenter{
+    background-repeat: no-repeat;
+    height: 150px;
+    width: 150px;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3);
+    margin: 30px 100px 30px 100px;
+    border: 30px solid white;
+    border-radius: 100px;
+    text-align: center;
+    background-color:white;
+}
+
+
+
+.ulist li h3{
+    font-size: 22px;
+    color: #6c05e2;
+    margin-top: 29px;
+    
+}
+/*.ulist li:first-child h3 {
+    background-position: -32px -24px;
+    width: 40px;
+    margin-left: 0px;
+}
+.ulist li:nth-child(2) h3{
+    background-position: -91px 0px;
+    width: 41px;
+}
+.ulist li:nth-child(3) h3{  
+    background-position: -137px 0px;
+    width: 55px;
+}
+.ulist li:nth-child(4) h3{
+    background-position: -195px 0px;
+    width: 57px;
+}
+.ulist li:nth-child(5) h3{
+    background-position: 0px -24px;
+    width: 28px;
+}
+.ulist li:nth-child(6) h3{
+    background-position: 0px 0px;
+    width: 55px;
+}
+.ulist li:nth-child(7) h3{
+    background-position: -59px 0px;
+    width: 27px;
+}*/

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href = "{{ url_for('static', filename='./css/top.css')}}">
+    <title>Gallery</title>
+    <style>
+        .main{
+            height: 130px;
+        }
+        .text{
+            color : white; position: absolute; bottom: 0;
+            left: 0;margin: 0 10px 12px; background-color : rgba(0,0,0,.6); font-size: 0.2rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div id = "top">
+            <h1 id="title">GALLERY</h1> 
+        </div>
+    </header>
+    <nav style = "width : 210px; margin:0;">
+        <a href = "/"><h3>메인 페이지로 돌아가기</h3></a>
+    </nav>
+    <main>
+        {% set ns = namespace(a = 0) %}
+        {% for n in files %}
+        <!--
+            <div style = "position: relative; width: 100px; height: 100%;display: inline-block; ">
+                <img class = main style = "position: relative; display: inline-block;" src = "{{n}}">
+                <a href="#" style = "color : white; position: absolute; bottom: 0;
+                left: 0;padding: 0 15px 12px;" role="button">sdfg</a>
+            </div>-->
+            <div style = "display: inline-block; position: relative;">
+            <img class = main style = "position : relative" src = "{{n}}">
+            <span class = "text" role="button">{{show[ns.a]}}</span>
+            </div>
+            {% set ns.a = ns.a+1 %}
+        {% endfor %}
+    </main>
+    <footer>
+        <h5>made by efrona</h5>
+    </footer>
+</body>
+</html>

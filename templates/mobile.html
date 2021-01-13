@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+    <head>
+        <meta name="naver-site-verification" content="68bfeb507caa4417d316a73241d0c2e20fd607d1" />
+        <meta charset="utf-8" />
+        <title>EFRONA PYTHON SITE</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href = "{{ url_for('static', filename='./css/main2.css')}}">
+    </head>
+    <body>
+        <header>
+            <div class = "center-align">
+                <div class = "center-align">
+                    <span><a href = "https://youtube.com/c/efrona">WHO IS EFRONA</a></span>
+                    <span><a href="https://efrona.tistory.com/">TISTORY</a></span>
+                </div>
+                <div id = "header_search">
+                    <a href = "/">
+                        <h1>
+                            <span>에프로나</span>
+                        </h1>
+                    </a>
+                    <fieldset>
+                        <form action = {{url_for('search')}} method = "GET"
+                            enctype = "multipart/form-data">
+                            <input type = "text" name = "input" placeholder="검색어를입력하든가말든가" />
+                            <button type = "submit">
+                                <span class = "search-image"></span>
+                            </button>
+                        </form>
+                    </fieldset>
+                </div>
+            </div>
+        </header>
+        
+        <main>
+            <div id = "main_center">
+                <div id = "mainclass">
+                    <div class = "alert"><span>id중복체크,닉네임중복체크 기능 추가로 인한
+                        계정 데이터 초기화, 다시 회원가입 해야합니다.
+                    </span>
+                    </div>
+                        {% if session['logged_in'] %}
+                        <fieldset id = "field2">
+                            {% if isthere == True %}
+                            <div class = "profile2">
+                                <img src = "./static/profile/{{name}}/profile.png"/>
+                            </div>
+                            {% endif %}
+                            <div class = "profile">
+                                <h3>{{showname}}님, 안녕하세요.</h3>
+                                <a href="/logout" style = "text-decoration: underline;"><button type = "submit">
+                                    Logout
+                                </button></a><br><br>
+                            </div>
+                        {% else %}
+                        <fieldset id = "field">
+                            <div>
+                                <div>
+                                    <form action="/login" method = "POST">
+                                        <fieldset class = "input">
+                                        <input type = "username" name="username" placeholder="아이디" required><br>    
+                                        </fieldset>
+                                        <fieldset class = "input">
+                                        <input type = "password" name = "password" placeholder="비밀번호" required><br>    
+                                        </fieldset>
+                                        <button type = "submit" class = "lb">
+                                            로그인
+                                        </button>
+                                    </form>
+                                    <button class = "rb">
+                                        <a href="/register">회원가입</a>
+                                    </button>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </fieldset>
+                </div>
+            </div>
+        </main>
+        <nav id = "nav">
+            <div class = "center-align">
+                <ul class = "ulist">
+                    <li>
+                        <a href = "/gallery">
+                            <div class = "licenter">
+                            <h3>갤러리</h3>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href = "/upload"><div class = "licenter"><h3>업로드</h3></div></a>
+                    </li>
+                    <li>
+                        <a href = "/downfile"><div class = "licenter"><h3>다운로드</h3></div></a>
+                    </li>
+                    <li> 
+                        <a href = "/patch"><div class = "licenter"><h3>패치노트</h3></div></a>
+                    </li>
+                    <li>
+                        <a href = "/movie"><div class = "licenter"><h3>영상</h3></div></a>
+                    </li>
+                    <li>
+                        <a href ="/mypage"><div class = "licenter"><h3>계정</h3></div></a>
+                    </li> 
+                    <li>
+                        <a href = "/content"><div class = "licenter"><h3>웹 설명</h3></div></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <footer class = "footer">
+            <h5>Contact : lyh4215@naver.com</h5>
+            <h5>클라우드서비스를 지원합니다.</h5>
+            <h5>made by efrona</h5>
+        </footer>
+    </body>
+</html>

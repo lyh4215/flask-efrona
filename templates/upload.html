@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="kr">
+<html>
+   <head>
+      <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+      <link rel="stylesheet" href = "{{ url_for('static', filename='./css/top.css')}}">
+   </head>
+   <body>
+      <header>
+         <div id = "top">
+             <h1 id="title">UPLOAD PAGE</h1>
+         </div>
+         <script>
+            function aa() {
+               alert('업로드하시겠습니까?');
+            }
+         </script>
+         <style>
+            input[type="submit"], input#file-upload-button {
+            box-shadow: 0px 0px 7px rgba(0,0,0,0.3);
+            background-color: white;
+            border: 2px solid white;
+            border-radius: 20px;
+            
+            }
+         </style>
+      </header>
+      <main>
+      {% block content %}
+      {% endblock %}
+      <h2>업로드 용량 제한 X, BUT 파일이 클수록 오래걸림.</h2>
+      <h3>{{showname}}님의 개인 저장소에 업로드</h3>
+      <form action = {{url_for('upload_file')}} method = "POST"
+         enctype = "multipart/form-data">
+         <input type = "file" name = "file" />
+         <input type = "where" value = "my" name = "where" style = "display : none;" />
+         <input type = "submit" onclick = "aa()" />
+      </form>
+      <h3>공용 저장소에 업로드</h3>
+      <form action = {{url_for('upload_file')}} method = "POST"
+         enctype = "multipart/form-data">
+         <input type = "file" name = "file" />
+         <input type = "where" value = "nomy" name = "where" style = "display : none;" />
+         <input type = "submit" onclick = "aa()"/>
+      </form>
+      </main>
+      <nav>
+         <a href = "/"><h3>메인 페이지로 돌아가기</h3></a>
+      </nav>
+   </body>
+</html>

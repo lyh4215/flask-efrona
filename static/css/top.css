@@ -1,0 +1,14 @@
+html, body{
+    margin: 0;
+    padding : 0;
+}
+
+#top{
+    background-image : url('../image/top.png');
+    background-position: -140px 0px;
+    margin: 0;
+}
+#title{
+    margin:0px 0px 0px 20px;
+    color : white
+}

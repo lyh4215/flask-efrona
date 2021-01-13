@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="kr">
+ <head>
+  <meta charset="UTF-8">
+  <title>MYPAGE</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href = "{{ url_for('static', filename='./css/top.css')}}">
+  <style>
+	html, body {width:100%; height: 100%;}
+	.photo {position:relative; width: 900px; margin:10px auto; padding:2px; color: #ffffcc; background-color: #204680; text-align: center;}
+	.name {color:#f0e008;}
+  </style>
+ </head>
+ <body>
+	<header>
+        <div id = "top">
+            <h1 id="title">MYPAGE</h1>
+        </div>
+	</header>
+	<main>
+		<div class="photo">
+			<h2>이름 : <span class="name">{{showname}}</span></h2>
+			<h3>업로드한 파일 갯수 : <span class = "name">{{ myfiles }}</span>개</h3>
+			<div>
+				{% if isthere == True %}
+				<img src = "./static/profile/{{name}}/profile.png" width = 100px/>
+				프로필
+				{% else %}
+				프로필 사진이 없습니다.
+				{% endif %}
+			</div>
+			<a href = "/profileupload" style = "text-decoration: none; color : gray;"><h3>프로필사진업로드</h3></a>
+		</div>
+	</main>
+ </body>

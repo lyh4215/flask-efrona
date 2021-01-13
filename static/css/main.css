@@ -1,0 +1,218 @@
+*{
+    box-sizing: border-box;
+}
+
+html, body{
+    margin: 0;
+    padding : 0;
+    font-family: -apple-system,BlinkMacSystemFont,"Malgun Gothic","맑은 고딕",helvetica,"Apple SD Gothic Neo",sans-serif;
+}
+
+main{
+    background-color: rgb(245, 245, 245);
+}
+
+#main_center {
+    margin: 0 auto;
+    width: 1080px;
+}
+
+a{
+    color: black;
+    text-decoration: none;
+}
+.center-align {
+    margin: 0 auto;
+    width: 1080px;
+    
+}
+#nav {
+    box-shadow: 0px 2px 3px rgba(0,0,0,0.3);
+}
+
+.ulist{
+    margin:0;
+    padding:0;
+    list-style: none;
+}
+.ulist li {
+    display: inline-block;
+}
+#logo{
+    margin: 0 auto;
+}
+.footer{
+    background-color : #dadada;
+    position: relative;
+    bottom : 0px;
+    text-align: center;
+}
+
+.footer h5{
+    margin : 0;
+}
+#fixed {
+    position: fixed;
+    bottom: 50px;
+    right : 50px;
+    display: inline-block;
+    width: 300px;
+    height: 30px;
+    background-color:#6c05e2;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    text-align : center;
+}
+
+#fixed span{
+    color:aliceblue;
+    display : inline-block;
+    vertical-align: middle;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#header_search a h1 {
+    background-image: url('../image/logo.png');
+    width: 198px;
+    height: 48px;
+    background-position: 0px -533px;
+    background-size: 200px 160px;
+    display: inline-block;
+    position : relative;
+}
+
+#header_search a{
+    text-decoration: none;
+    vertical-align: middle;
+}
+#header_search a h1 span{
+    display: none;
+}
+
+#header_search fieldset {
+    margin : 0px 0px 0px 20px;
+    padding: 12px 0px 12px 10px;
+    border: 2px solid #6c05e2;
+    width: 521px;
+    height: 49px;
+    display : inline-block; 
+    vertical-align: middle;
+    position : relative;
+    
+}
+
+#mainclass fieldset{
+    margin : 0px 0px 0px 20px;
+    padding: 12px 0px 12px 10px;
+    border: 3px solid white;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 19px rgba(0,0,0,0.3);
+    width: 400px;
+    display : inline-block; 
+    vertical-align: middle;
+    position : relative;
+    background-color : white;
+    top: 17px;
+}
+
+.alert{
+    border: 22px solid white;
+    border-radius: 1rem;
+    margin: 0;
+    width: 500px;
+    position: relative;
+    display: inline-block;
+    box-shadow: 5px 5px 19px rgba(0,0,0,0.3);
+    background: white;
+}
+#mainclass fieldset button{
+    width: 400px;
+    height: 30px;
+    border: none;
+    padding: 0;
+    background : #6c05e2;
+    border-radius: 1rem;
+    position: absolute;
+    bottom: -3px;
+    left: -3px;
+    color: white;
+}
+
+#mainclass fieldset .profile{
+    display: inline-block;
+}
+
+#mainclass fieldset .profile2{
+    display: inline-block;
+    width:70px;
+    height:70px;
+    position: relative;
+    bottom: 40px;
+}
+#header_search fieldset button{
+    width: 49px;
+    height: 49px;
+    border: none;
+    padding: 0;
+    background : #6c05e2;
+    position: absolute;
+    right: -2px;
+    top : -2px;
+    
+}
+
+#header_search fieldset .search-image{
+    background-image: url(../image/sp_search.png);
+    background-position: -3px -60px;
+    background-repeat: no-repeat;
+    width:21px;
+    height: 21px;
+    display: inline-block;
+    margin: 14px;
+}
+#header_search fieldset input {
+    border: none;
+    padding : 0;
+    outline: none;
+    width : 405px;
+    height: 23px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.ulist li h3{
+    background-repeat: no-repeat;
+    height: 20px;
+    background-image: url('../image/sp_nav.png');
+    margin-left : 14px;
+}
+.ulist li:first-child h3 {
+    background-position: -32px -24px;
+    width: 40px;
+    margin-left: 0px;
+}
+.ulist li:nth-child(2) h3{
+    background-position: -91px 0px;
+    width: 41px;
+}
+.ulist li:nth-child(3) h3{  
+    background-position: -137px 0px;
+    width: 55px;
+}
+.ulist li:nth-child(4) h3{
+    background-position: -195px 0px;
+    width: 57px;
+}
+.ulist li:nth-child(5) h3{
+    background-position: 0px -24px;
+    width: 28px;
+}
+.ulist li:nth-child(6) h3{
+    background-position: 0px 0px;
+    width: 55px;
+}
+.ulist li:nth-child(7) h3{
+    background-position: -59px 0px;
+    width: 27px;
+}

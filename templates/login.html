@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+<body>
+    {% extends "top.html" %}
+    {% block content %}
+    {% if session['logged_in'] %}
+        <p>이미 로그인함</p>
+    {% else %}
+    <div>
+        <h2>로그인</h2>
+        <form action="/login" method = "POST">
+            <input type = "username" name="username" placeholder="아이디" required>
+            <input type = "password" name = "password" placeholder="비밀번호" required>
+            <input type = "backpage" name = "backpage" value = "{{backpage}}" style = "display : none;"/>
+            <input type="submit" value = "LOGIN">
+        </form>
+        <a href="/register" style = "text-decoration: underline; color : gray;">계정이 없다면? 회원가입하기</a>
+    </div>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

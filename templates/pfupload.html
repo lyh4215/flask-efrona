@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>프로필사진업로드</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href = "{{ url_for('static', filename='./css/top.css')}}">
+</head>
+<body>
+    <header>
+        <div id = "top">
+            <h1 id="title">UPLOAD PAGE</h1>
+        </div>
+     </header>
+     <main>
+        <h2>무조건 .png 파일 이여야 합니다.</h2>
+        <h3>{{showname}}님의 프로필 업로드</h3>
+        <form action = {{url_for('pfupload')}} method = "POST"
+           enctype = "multipart/form-data">
+           <input type = "file" name = "file" />
+           <input type = "submit"/>
+        </form>
+    </main>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="kr">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href = "{{ url_for('static', filename='./css/top.css')}}">
+    <head>
+        <meta charset="UTF-8">
+        <title>MOVIE</title>
+    </head>
+    <body>
+        <header>
+            <div id = "top">
+                <h1 id="title">MOVIE</h1>
+            </div>
+        </header>
+        <main>
+            <iframe width="560" height="315"
+            src="https://www.youtube.com/embed/UrhxFMhpo2Y"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write;
+            encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+            </iframe>
+        </main>
+        <nav>
+            <a href = "/"><h3>메인 페이지로 돌아가기</h3></a>
+        </nav>
+        <footer>
+            <h5>made by efrona</h5>
+        </footer>
+    </body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+</head>
+<body>
+    {% block content %}
+    {% if session['logged_in'] %}
+        <p>이미 가입됨</p>
+    {% else %}
+    <div>
+        <h2>회원가입</h2>
+        <form action="/register/" method = "POST">
+            <input type = "nickname" name="nickname" placeholder="닉네임" required><span style = "color : rgb(255, 40, 40);">필수</span><br>
+            <input type = "username" name="username" placeholder="아이디" required><span style = "color : rgb(255, 40, 40);">필수</span><br>
+            <input type = "password" name = "password" placeholder="비밀번호" required><span style = "color : rgb(255, 40, 40);">필수</span><br>
+            <input type = "email" name= "email" placeholder="email@eamil.com"><br>
+            <input type="submit" value = "회원가입">
+        </form>
+    </div>
+    {% endif %}
+    {% endblock %}
+</body>
+</html>

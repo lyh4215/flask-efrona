@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="kr">
+
+    <head>
+        <meta name="naver-site-verification" content="68bfeb507caa4417d316a73241d0c2e20fd607d1" />
+        <meta charset="utf-8" />
+        <title>EFRONA PYTHON SITE</title>
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <link rel="stylesheet" href = "{{ url_for('static', filename='./css/main.css')}}">
+    </head>
+    <!--
+    <script>
+        var filter = "win16|win32|win64|mac|macintel"; 
+        if ( navigator.platform ) {
+            if ( filter.indexOf( navigator.platform.toLowerCase() ) < 0 )
+            {
+                //mobile
+                alert('mobile 접속(테스트중)');
+                var pc = 0;
+                location.href = '/m';
+            }
+            else {
+                    //pc
+                alert('pc 접속(테스트중)');
+                var pc = 1;
+            }
+        }
+    </script>-->
+    <body>
+        <header>
+            <div id = "fixed">
+                <span><h4>Contact : lyh4215@naver.com</h4></span>
+            </div>
+            <div class = "center-align">
+                <div class = "center-align">
+                    <span><a href = "https://youtube.com/c/efrona">WHO IS EFRONA</a></span>
+                    <span><a href="https://efrona.tistory.com/">TISTORY</a></span>
+                </div>
+                <div id = "header_search">
+                    <a href = "/">
+                        <h1>
+                            <span>에프로나</span>
+                        </h1>
+                    </a>
+                    <fieldset>
+                        <form action = {{url_for('search')}} method = "GET"
+                            enctype = "multipart/form-data">
+                            <input type = "text" name = "input" placeholder="검색어를입력하든가말든가" />
+                            <button type = "submit">
+                                <span class = "search-image"></span>
+                            </button>
+                        </form>
+                    </fieldset>
+                </div>
+            </div>
+        </header>
+        <nav id = "nav">
+            <div class = "center-align">
+                <ul class = "ulist">
+                    <li>
+                        <a href = "/gallery"><h3></h3></a>
+                    </li>
+                    <li>
+                        <a href = "/upload"><h3></h3></a>
+                    </li>
+                    <li>
+                        <a href = "/downfile"><h3></h3></a>
+                    </li>
+                    <li> 
+                        <a href = "/patch"><h3></h3></a>
+                    </li>
+                    <li>
+                        <a href = "/movie"><h3></h3></a>
+                    </li>
+                    <li>
+                        <a href ="/mypage"><h3></h3></a>
+                    </li> 
+                    <li>
+                        <a href = "/content"><h3></h3></a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <main>
+            <div id = "main_center">
+                <div id = "mainclass">
+                    
+                    <fieldset>
+                        {% if session['logged_in'] %}
+                        {% if data %}
+                            <h3>{{ data }}</h3>
+                        {% else %}
+                        {% if isthere == True %}
+                        <div class = "profile2">
+                            <img src = "./static/profile/{{name}}/profile.png" width = 50px style = "border-radius: 25em;"/>
+                        </div>
+                        {% endif %}
+                        <div class = "profile">
+                            <h3>{{showname}}님, 안녕하세요.</h3>
+                            <a href="/logout" style = "text-decoration: underline;"><button type = "submit">
+                                Logout
+                            </button></a><br><br>
+                        </div>
+                        
+                        {% endif %}
+                        {% else %}<div>
+                            <div>
+                                <h2 style = "margin : 0;">로그인</h2>
+                                <form action="/login" method = "POST">
+                                    <input type = "username" name="username" placeholder="아이디" required><br>
+                                    <input type = "password" name = "password" placeholder="비밀번호" required><br>
+                                    <button type = "submit">
+                                        로그인
+                                    </button>
+                                </form>
+                            </div>
+                            <a href="/register" style = "text-decoration: underline; color : gray;"><h3>계정이 없다면? 회원가입하기</h3></a>
+                        </div>
+                        {% endif %}
+                    </fieldset>
+                    <span class = "alert">id중복체크,닉네임중복체크 기능 추가로 인한
+                        계정 데이터 초기화, 다시 회원가입 해야합니다.
+                    </span>
+                </div>
+                <img src = "{{ url_for('static', filename='abc.jpg') }}" style = "width : 1080px; height : 500px; margin-top : 50px;"/>
+            </div>
+        </main>
+        <footer class = "footer">
+            <h5>클라우드서비스를 지원합니다.</h5>
+            <h5>made by efrona</h5>
+        </footer>
+    </body>
+</html>
