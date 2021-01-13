@@ -100,12 +100,7 @@ def defalut():
             else :
                 isthere = False
             return render_template('mobile.html', showname = result, isthere = isthere, name = name)
-
-<<<<<<< HEAD
 @app.route("/mobile")
-=======
-@app.route("/tes")
->>>>>>> 240a9d2043fd96177c1e9c54fddf041911187ba9
 def test():
     if not session.get('logged_in'):
         session['logged_in'] = False
