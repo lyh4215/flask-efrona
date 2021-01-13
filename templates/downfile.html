@@ -44,8 +44,8 @@
                     <input type = "submit" value = {{n}} name = "file" formaction="/fileDown"/>
                 </li>
                 {% endfor %}
-                <input type="button" value = "my" name = "my" style = "display:none;"/>
             </ul>
+            <input type="button" value = "my" name = "my" style = "display:none;"/>
             <input type = "submit" value = "delete" name = "file"  formaction="/deletefile"/>
         </form>
         {% else %}
@@ -61,8 +61,8 @@
                 {% for n in files %}
                 <li class = "list" style ="margin-bottom : 10px;"><input type = "submit" value = {{n}} name = "file"></li>
                 {% endfor %}
-                <input type="button" value = "nomy" name = "my" style = "display:none;"/>
             </ul>
+            <input type="button" value = "nomy" name = "my" style = "display:none;"/>
         </form>
     </main>
     <nav style = "width : 210px; margin:0;">
