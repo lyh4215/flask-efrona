@@ -11,6 +11,8 @@ import os
 #powershell 권한 -
 #Set-ExecutionPilicy Unrestricted -Scope CurrentUser
 
+
+
 def log_save2(req: 'flask_request', res: str) -> None:
     with open('uploadlogfile.log', 'a') as log2:
         ip = request.remote_addr
@@ -99,7 +101,11 @@ def defalut():
                 isthere = False
             return render_template('mobile.html', showname = result, isthere = isthere, name = name)
 
+<<<<<<< HEAD
 @app.route("/mobile")
+=======
+@app.route("/tes")
+>>>>>>> 240a9d2043fd96177c1e9c54fddf041911187ba9
 def test():
     if not session.get('logged_in'):
         session['logged_in'] = False
@@ -205,6 +211,7 @@ def upload_file():
                     f.save('./LoginUpload/' + session['username'] + '/' + time.strftime('%y%m%d') + '-' + secure_filename(f.filename))
             elif where == 'nomy':
                 f.save('./uploads/' + secure_filename(f.filename))
+                print(f.filename)
             log_save2(request, f.filename)
             result = '%s' % escape(session['name'])
             return render_template('upsuccess.html', showname = result)
