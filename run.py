@@ -11,6 +11,8 @@ import os
 #powershell 권한 -
 #Set-ExecutionPilicy Unrestricted -Scope CurrentUser
 
+
+
 def log_save2(req: 'flask_request', res: str) -> None:
     with open('uploadlogfile.log', 'a') as log2:
         ip = request.remote_addr
@@ -39,6 +41,9 @@ def check_b():
 app = Flask(__name__, static_url_path = '/static')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
+
+db.create_all()
+app.secret_key = "123123123"
 
 @app.before_request
 def make_session_permanent():
