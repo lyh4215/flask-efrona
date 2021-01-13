@@ -206,6 +206,7 @@ def upload_file():
                     f.save('./LoginUpload/' + session['username'] + '/' + time.strftime('%y%m%d') + '-' + secure_filename(f.filename))
             elif where == 'nomy':
                 f.save('./uploads/' + secure_filename(f.filename))
+                print(1)
                 print(f.filename)
             log_save2(request, f.filename)
             result = '%s' % escape(session['name'])
