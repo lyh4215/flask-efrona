@@ -38,6 +38,7 @@ def check_b():
 
 app = Flask(__name__, static_url_path = '/static')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['MAX_CONTENT_LENGTH'] = 500 * 1024 * 1024
 db = SQLAlchemy(app)
 
 @app.before_request
@@ -98,7 +99,7 @@ def defalut():
                 isthere = False
             return render_template('mobile.html', showname = result, isthere = isthere, name = name)
 
-@app.route("/test")
+@app.route("/mobile")
 def test():
     if not session.get('logged_in'):
         session['logged_in'] = False
@@ -190,28 +191,26 @@ def render_file():
         return '다시로그인'
 @app.route('/fileUpload', methods = ['GET','POST'])
 def upload_file():
-    if request.method == 'POST':
-        f = request.files['file']
-        where = request.form['where']
-        if where == 'my':
-            if (os.path.isdir('./LoginUpload/' + session['username']) == False):
-                os.mkdir('./LoginUpload/' + session['username'])
-            path = os.listdir('./LoginUpload/' + session['username'])
-            if check_a(f.filename, path):
-                f.save('./LoginUpload/' + session['username'] + '/' + time.strftime('%y%m%d') + '-' + secure_filename(f.filename))
-            else :
-                f.save('./LoginUpload/' + session['username'] + '/' + time.strftime('%y%m%d') + '-' + secure_filename(f.filename))
-        elif where == 'nomy':
-            f.save('./uploads/' + secure_filename(f.filename))
-        log_save2(request, f.filename)
-        result = '%s' % escape(session['name'])
-        return render_template('upsuccess.html', showname = result)
+    try:
+        if request.method == 'POST':
+            f = request.files['file']
+            where = request.form['where']
+            if where == 'my':
+                if (os.path.isdir('./LoginUpload/' + session['username']) == False):
+                    os.mkdir('./LoginUpload/' + session['username'])
+                path = os.listdir('./LoginUpload/' + session['username'])
+                if check_a(f.filename, path):
+                    f.save('./LoginUpload/' + session['username'] + '/' + time.strftime('%y%m%d') + '-' + secure_filename(f.filename))
+                else :
+                    f.save('./LoginUpload/' + session['username'] + '/' + time.strftime('%y%m%d') + '-' + secure_filename(f.filename))
+            elif where == 'nomy':
+                f.save('./uploads/' + secure_filename(f.filename))
+            log_save2(request, f.filename)
+            result = '%s' % escape(session['name'])
+            return render_template('upsuccess.html', showname = result)
+    except:
+        return ('파일 크기 제한은 500MB입니다.')
 
-#list
-@app.route("/list")
-def lists():
-    files = os.listdir("./uploads")
-    return render_template('list.html', files = files)
 
 #list&download
 @app.route("/downfile")
@@ -281,9 +280,65 @@ def showimg():
     for i in range(len(files)):
         files[i] = path + files[i]
     filename = os.listdir("./static/poster")
-    return render_template('gallery.html', files = files, show = filename)
+    if session['username'] == 'admin':
+        upload= 1
+    else:
+        upload =0
+    return render_template('gallery.html', files = files, show = filename, upload = upload)
 
+#UPLOAD
+@app.route('/galleryupload')
+def grender_file():
+    try:
+        if session['logged_in'] is None:
+            session['logged_in'] = False
+        if session['logged_in'] == True:
+            result = '%s' % escape(session['name'])
+            return render_template('gupload.html', showname = result)
+        else :
+            backpage = "grender_file"
+            return render_template('login.html', backpage = backpage)
+    except:
+        return '다시로그인'
+@app.route("/gupload", methods = ['GET','POST'] )
+def gupload():
+    try:
+        if request.method == 'POST':
+            f = request.files['file']
+            if f.filename.rsplit('.', 1)[1] == 'png' or f.filename.rsplit('.', 1)[1] == 'jpg' or f.filename.rsplit('.', 1)[1] == 'jpeg':
+                f.save('./static/poster/'+ secure_filename(f.filename))
+            else:
+                return 'png, jpg, jpeg 확장자가 아닙니다.'
+            return 'upload가 성공적으로 완료되었습니다.'
+    except:
+        return ('파일 크기 제한은 500MB입니다.')
 
+#list&download
+@app.route("/gdownfile")
+def gdownmain():
+    files = os.listdir('./static/poster/')
+    if session['logged_in'] == True:
+        myfiles = os.listdir('./static/poster/')
+        result = '%s' % escape(session['name'])
+        return render_template('downfile.html', files = files, showname = result, myfiles = myfiles)
+    else:
+        files = os.listdir('./static/poster/')
+        return render_template('gdownfile.html', files = files)
+
+@app.route("/gdeletefile", methods = ['POST'])
+def gdeletefile():
+    if request.method == 'POST':
+        if session['logged_in'] == True:
+            name = request.form['radio']
+            path = './static/poster/'
+            os.remove(path + name)
+            files = os.listdir('./static/poster/')
+            myfiles = os.listdir('./static/poster/')
+            result = '%s' % escape(session['name'])
+            return render_template('gdeleted.html', files = files, showname = result, myfiles = myfiles)
+        return redirect(url_for('login'))
+    else :
+        return render_template('main.html')
 
 #patch
 @app.route("/patch")

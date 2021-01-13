@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="kr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href = "{{ url_for('static', filename='./css/top.css')}}">
+    <style>
+        .list{
+            list-style: none;
+        }
+        .hi{
+            background-color : green;
+            color : green;
+
+        }
+        input[type="submit"] {
+            box-shadow: 0px 0px 7px rgba(0,0,0,0.3);
+            background-color: white;
+            border: 2px solid white;
+            border-radius: 20px;
+        }
+    </style>
+    <title>DOWMLOAD</title>
+</head>
+<body>
+    <header>
+        <div id = "top">
+            <h1 id="title">FILE DOWNLOAD PAGE</h1>
+        </div>
+    </header>
+    <main>
+        {% block content %}
+        {% endblock %}
+        <h2>파일 리스트</h2>
+        {% if session['logged_in'] %}
+        <h3>{{showname}}님의 개인 저장소</h3>
+        <form action = {{url_for('download')}} method = "POST"
+            enctype="multipart/form-data">
+            <ul>
+                {% for n in myfiles %}
+                <li class = "list" style ="margin-bottom : 10px;">
+                    <input type = "radio" value = {{n}} name = "radio">
+                    <input type = "submit" value = {{n}} name = "file" formaction="/fileDown"/>
+                </li>
+                {% endfor %}
+            </ul>
+            <input type = "submit" value = "delete" name = "file"  formaction="/deletefile"/>
+        </form>
+        {% else %}
+        <form action = {{url_for('login')}}>
+            <h4 style = "display : inline-block;">개인 저장소에 있는 걸 다운로드하려면?</h4>
+            <input style = "display : inline-block;" type = "submit" value = "로그인하기" />
+         </form>
+        {% endif %}
+        <h3>공용 저장소</h3>
+        <form action = {{url_for('download')}} method = "POST"
+            enctype="multipart/form-data">
+            <ul>
+                {% for n in files %}
+                <li class = "list" style ="margin-bottom : 10px;"><input type = "submit" value = {{n}} name = "file"></li>
+                {% endfor %}
+            </ul>
+        </form>
+    </main>
+    <nav style = "width : 210px; margin:0;">
+        <a href = "/"><h3>메인 페이지로 돌아가기</h3></a>
+    </nav>
+    <footer>
+        <h5>made by efrona</h5>
+    </footer>
+</body>
+</html>

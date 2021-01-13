@@ -6,6 +6,7 @@
     <title>register</title>
 </head>
 <body>
+    {% extends "top.html" %}
     {% block content %}
     {% if session['logged_in'] %}
         <p>이미 가입됨</p>

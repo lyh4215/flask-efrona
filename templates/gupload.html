@@ -29,19 +29,10 @@
       {% block content %}
       {% endblock %}
       <h2>업로드 용량 제한 500MB, 파일이 클수록 오래걸림.</h2>
-      <h3>{{showname}}님의 개인 저장소에 업로드</h3>
-      <form action = {{url_for('upload_file')}} method = "POST"
+      <form action = {{url_for('gupload')}} method = "POST"
          enctype = "multipart/form-data">
          <input type = "file" name = "file" />
-         <input type = "where" value = "my" name = "where" style = "display : none;" />
          <input type = "submit" onclick = "aa()" />
-      </form>
-      <h3>공용 저장소에 업로드</h3>
-      <form action = {{url_for('upload_file')}} method = "POST"
-         enctype = "multipart/form-data">
-         <input type = "file" name = "file" />
-         <input type = "where" value = "nomy" name = "where" style = "display : none;" />
-         <input type = "submit" onclick = "aa()"/>
       </form>
       </main>
       <nav>

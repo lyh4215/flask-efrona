@@ -24,6 +24,10 @@
     </header>
     <nav style = "width : 210px; margin:0;">
         <a href = "/"><h3>메인 페이지로 돌아가기</h3></a>
+        {% if upload == 1 %}
+        <a href = "/galleryupload">갤러리업로드</a>
+        <a href = "/gdownfile">갤러리관리</a>
+        {% endif %}
     </nav>
     <main>
         {% set ns = namespace(a = 0) %}
