@@ -230,7 +230,7 @@ def downmain():
 @app.route("/fileDown", methods = ['POST'])
 def download():
     if request.method == 'POST':
-        if session['logged_in'] == True:
+        if request.form['my'] == "my":
             if os.path.isdir('./LoginUpload/' + session['username'] == False):
                 os.mkdir('./LoginUpload/' + session['username'])
             files = os.listdir("./LoginUpload/" + session['username'])
