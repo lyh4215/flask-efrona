@@ -42,9 +42,6 @@ app = Flask(__name__, static_url_path = '/static')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 
-db.create_all()
-app.secret_key = "123123123"
-
 @app.before_request
 def make_session_permanent():
     session.permanent = True
@@ -103,7 +100,7 @@ def defalut():
                 isthere = False
             return render_template('mobile.html', showname = result, isthere = isthere, name = name)
 
-@app.route("/test")
+@app.route("/tes")
 def test():
     if not session.get('logged_in'):
         session['logged_in'] = False
