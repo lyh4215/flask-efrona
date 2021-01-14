@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /LoginUpload/
+Disallow: /static/profile/
+Disallow: /uploads/
