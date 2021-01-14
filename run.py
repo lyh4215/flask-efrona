@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*- 
-from flask import Flask, render_template, request, escape, send_file, url_for, session, redirect, app
+from flask import Flask, render_template, request, escape, send_file, url_for, session, redirect, app, send_from_directory
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -77,6 +77,10 @@ class User(db.Model):
 @app.errorhandler(404)
 def page_not_found(error):
 	return render_template('nopage.html'), 404
+
+@app.route('/robots.txt')
+def robot_to_root():
+    return send_from_directory(app.static_folder, request.path[1:])
 
 #text return
 @app.route('/', methods=['GET', 'POST'])
