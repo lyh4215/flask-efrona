@@ -5,12 +5,12 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 #from vsearch import search4letters
 from datetime import timedelta
+from random import *
 import time
 import os
 
 #powershell 권한 -
 #Set-ExecutionPilicy Unrestricted -Scope CurrentUser
-
 
 
 def log_save2(req: 'flask_request', res: str) -> None:
@@ -73,22 +73,44 @@ class User(db.Model):
     def __repr__(self):
         return f"<User( '{self.username}', '{self.email}')>"
 
+#404 
+@app.errorhandler(404)
+def page_not_found(error):
+	return render_template('nopage.html'), 404
+
 #text return
 @app.route('/', methods=['GET', 'POST'])
 def defalut():
-    if check_b() == 1:
-        if not session.get('logged_in'):
-            session['logged_in'] = False
-            return render_template('main.html')
-        else:
-            result = '%s' % escape(session['name'])
-            name = session['username']
-            if os.path.isdir("./static/profile/" + session['username']):
-                isthere = True
-            else :
-                isthere = False
-            return render_template('main.html', showname = result, isthere = isthere, name = name)
-    if check_b() == 0:
+    try:
+        if check_b() == 1:
+            if not session.get('logged_in'):
+                session['logged_in'] = False
+                return render_template('main.html')
+            else:
+                result = '%s' % escape(session['name'])
+                name = session['username']
+                if os.path.isdir("./static/profile/" + session['username']):
+                    isthere = True
+                else :
+                    isthere = False
+                return render_template('main.html', showname = result, isthere = isthere, name = name)
+        if check_b() == 0:
+            if not session.get('logged_in'):
+                session['logged_in'] = False
+                return render_template('mobile.html')
+            else:
+                result = '%s' % escape(session['name'])
+                name = session['username']
+                if os.path.isdir("./static/profile/" + session['username']):
+                    isthere = True
+                else :
+                    isthere = False
+                return render_template('mobile.html', showname = result, isthere = isthere, name = name)
+    except:
+        return render_template('nopage.html'), 404
+@app.route("/mobile")
+def test():
+    try:
         if not session.get('logged_in'):
             session['logged_in'] = False
             return render_template('mobile.html')
@@ -100,61 +122,62 @@ def defalut():
             else :
                 isthere = False
             return render_template('mobile.html', showname = result, isthere = isthere, name = name)
-@app.route("/mobile")
-def test():
-    if not session.get('logged_in'):
-        session['logged_in'] = False
-        return render_template('mobile.html')
-    else:
-        result = '%s' % escape(session['name'])
-        name = session['username']
-        if os.path.isdir("./static/profile/" + session['username']):
-            isthere = True
-        else :
-            isthere = False
-        return render_template('mobile.html', showname = result, isthere = isthere, name = name)
+    except:
+        return redirect(url_for('defalut'))
 
 @app.route("/mypage")
 def mypage():
-    if session['logged_in'] is None  or session['logged_in'] == False:
-        session['loggen_in'] = False
-        backpage = "mypage"
-        return render_template('login.html', backpage=backpage)
-    else:
-        result = '%s' % escape(session['name'])
-        if os.path.isdir("./LoginUpload/" + session['username']) == False:
-            os.mkdir('./LoginUpload/' + session['username'])
-        myfiles = os.listdir("./LoginUpload/" + session['username'])
-        myfiles = len(myfiles)
-        name = session['username']
-        if os.path.isdir("./static/profile/" + session['username']):
-            isthere = True
-        else :
-            isthere = False
-        return render_template('html1.html', showname = result, myfiles = myfiles, name = name, isthere = isthere)
+    try:
+        if session['logged_in'] is None  or session['logged_in'] == False:
+            session['loggen_in'] = False
+            backpage = "mypage"
+            return render_template('login.html', backpage=backpage)
+        else:
+            result = '%s' % escape(session['name'])
+            if os.path.isdir("./LoginUpload/" + session['username']) == False:
+                os.mkdir('./LoginUpload/' + session['username'])
+            myfiles = os.listdir("./LoginUpload/" + session['username'])
+            myfiles = len(myfiles)
+            name = session['username']
+            if os.path.isdir("./static/profile/" + session['username']):
+                isthere = True
+            else :
+                isthere = False
+            return render_template('html1.html', showname = result, myfiles = myfiles, name = name, isthere = isthere)
+    except:
+        return redirect(url_for('defalut'))
 
 @app.route("/profileupload")
 def profile():
-    if session['logged_in'] == False:
-        return render_template('login.html')
-    else:
-        return render_template('pfupload.html')
+    try:
+        if session['logged_in'] == False:
+            return render_template('login.html')
+        else:
+            return render_template('pfupload.html')
+    except:
+        return redirect(url_for('defalut'))
 @app.route("/profileuploading", methods = ['GET','POST'] )
 def pfupload():
-    if request.method == 'POST':
-        f = request.files['file']
-        if (os.path.isdir('./static/profile/' + session['username']) == False):
-            os.mkdir('./static/profile/' + session['username'])
-        if f.filename.rsplit('.', 1)[1] == 'png':
-            f.save('./static/profile/' + session['username'] + '/profile.png')
-        else:
-            return 'png 확장자가 아닙니다.'
-        return 'upload가 성공적으로 완료되었습니다.'
+    try:
+        if request.method == 'POST':
+            f = request.files['file']
+            if (os.path.isdir('./static/profile/' + session['username']) == False):
+                os.mkdir('./static/profile/' + session['username'])
+            if f.filename.rsplit('.', 1)[1] == 'png':
+                f.save('./static/profile/' + session['username'] + '/profile.png')
+            else:
+                return 'png 확장자가 아닙니다.'
+            return 'upload가 성공적으로 완료되었습니다.'
+    except:
+        return redirect(url_for('defalut'))
 @app.route("/search", methods = ['GET', 'POST'])
 def search():
-    yourinput = request.args.get('input')
-    log_request(request, yourinput)
-    return render_template('search.html', result = yourinput)
+    try:
+        yourinput = request.args.get('input')
+        log_request(request, yourinput)
+        return render_template('search.html', result = yourinput)
+    except:
+        return redirect(url_for('defalut'))
 
 #youtube return
 @app.route("/movie")
@@ -189,7 +212,7 @@ def render_file():
             backpage = "render_file"
             return render_template('login.html', backpage = backpage)
     except:
-        return '다시로그인'
+        return redirect(url_for('defalut'))
 @app.route('/fileUpload', methods = ['GET','POST'])
 def upload_file():
     try:
@@ -216,76 +239,90 @@ def upload_file():
 #list&download
 @app.route("/downfile")
 def downmain():
-    files = os.listdir("./uploads")
-    if session['logged_in'] == True:
-        if (os.path.isdir('./LoginUpload/' + session['username']) == False):
-            os.mkdir('./LoginUpload/' + session['username'])
-        myfiles = os.listdir("./LoginUpload/" + session['username'])
-        result = '%s' % escape(session['name'])
-        return render_template('downfile.html', files = files, showname = result, myfiles = myfiles)
-    else:
+    try:
         files = os.listdir("./uploads")
-        return render_template('downfile.html', files = files)
+        if session['logged_in'] == True:
+            if (os.path.isdir('./LoginUpload/' + session['username']) == False):
+                os.mkdir('./LoginUpload/' + session['username'])
+            myfiles = os.listdir("./LoginUpload/" + session['username'])
+            result = '%s' % escape(session['name'])
+            return render_template('downfile.html', files = files, showname = result, myfiles = myfiles)
+        else:
+            files = os.listdir("./uploads")
+            return render_template('downfile.html', files = files)
+    except:
+        return redirect(url_for('defalut'))
 
 @app.route("/fileDown", methods = ['POST'])
 def download():
-    if request.method == 'POST':
-        if request.form['my'] == "my":
-            if os.path.isdir('./LoginUpload/' + session['username'] == False):
-                os.mkdir('./LoginUpload/' + session['username'])
-            files = os.listdir("./LoginUpload/" + session['username'])
-            find = 0
-            for x in files:
-                if(x==request.form['file']):
-                    find = 1
-            if(find == 1):
-                path = "./LoginUpload/" + session['username'] + "/"
-                return send_file(path + request.form['file'], 
-                attachment_filename = request.form['file'], 
-                as_attachment=True)
+    try:
+        if request.method == 'POST':
+            if request.form['my'] == "my":
+                if os.path.isdir('./LoginUpload/' + session['username'] == False):
+                    os.mkdir('./LoginUpload/' + session['username'])
+                files = os.listdir("./LoginUpload/" + session['username'])
+                find = 0
+                for x in files:
+                    if(x==request.form['file']):
+                        find = 1
+                if(find == 1):
+                    path = "./LoginUpload/" + session['username'] + "/"
+                    return send_file(path + request.form['file'], 
+                    attachment_filename = request.form['file'], 
+                    as_attachment=True)
+                else:
+                    return request.form['file']
             else:
-                return request.form['file']
-        else:
-            files = os.listdir("./uploads")
-            find = 0
-            for x in files:
-                if(x==request.form['file']):
-                    find = 1
-            if(find == 1):
-                path = "./uploads/"
-                return send_file(path + request.form['file'], 
-                attachment_filename = request.form['file'], 
-                as_attachment=True)
-            else:
-                return request.form['file']
+                files = os.listdir("./uploads")
+                find = 0
+                for x in files:
+                    if(x==request.form['file']):
+                        find = 1
+                if(find == 1):
+                    path = "./uploads/"
+                    return send_file(path + request.form['file'], 
+                    attachment_filename = request.form['file'], 
+                    as_attachment=True)
+                else:
+                    return request.form['file']
+    except:
+        return redirect(url_for('defalut'))
 
 @app.route("/deletefile", methods = ['POST'])
 def deletefile():
-    if request.method == 'POST':
-        if session['logged_in'] == True:
-            name = request.form['radio']
-            path = "./LoginUpload/" + session['username'] + "/"
-            os.remove(path + name)
-            files = os.listdir("./uploads")
-            myfiles = os.listdir("./LoginUpload/" + session['username'])
-            result = '%s' % escape(session['name'])
-            return render_template('deleted.html', files = files, showname = result, myfiles = myfiles)
-        return redirect(url_for('login'))
-    else :
-        return render_template('main.html')
+    try:
+        if request.method == 'POST':
+            if session['logged_in'] == True:
+                name = request.form['radio']
+                path = "./LoginUpload/" + session['username'] + "/"
+                os.remove(path + name)
+                files = os.listdir("./uploads")
+                myfiles = os.listdir("./LoginUpload/" + session['username'])
+                result = '%s' % escape(session['name'])
+                return render_template('deleted.html', files = files, showname = result, myfiles = myfiles)
+            return redirect(url_for('login'))
+        else :
+            return render_template('main.html')
+    except:
+        return redirect(url_for('defalut'))
 
 @app.route("/gallery")
 def showimg():
-    files = os.listdir("./static/poster")
-    path = "./static/poster/"
-    for i in range(len(files)):
-        files[i] = path + files[i]
-    filename = os.listdir("./static/poster")
-    if session['username'] == 'admin':
-        upload= 1
-    else:
+    try:
+        files = os.listdir("./static/poster")
+        path = "./static/poster/"
+        for i in range(len(files)):
+            files[i] = path + files[i]
+        filename = os.listdir("./static/poster")
         upload =0
-    return render_template('gallery.html', files = files, show = filename, upload = upload)
+        if session['logged_in'] :
+            if session['username'] == 'admin':
+                upload= 1
+            else:
+                upload =0
+        return render_template('gallery.html', files = files, show = filename, upload = upload)
+    except:
+        return redirect(url_for('defalut'))
 
 #UPLOAD
 @app.route('/galleryupload')
@@ -300,7 +337,7 @@ def grender_file():
             backpage = "grender_file"
             return render_template('login.html', backpage = backpage)
     except:
-        return '다시로그인'
+        return redirect(url_for('defalut'))
 @app.route("/gupload", methods = ['GET','POST'] )
 def gupload():
     try:
@@ -317,39 +354,39 @@ def gupload():
 #list&download
 @app.route("/gdownfile")
 def gdownmain():
-    files = os.listdir('./static/poster/')
-    if session['logged_in'] == True:
-        myfiles = os.listdir('./static/poster/')
-        result = '%s' % escape(session['name'])
-        return render_template('downfile.html', files = files, showname = result, myfiles = myfiles)
-    else:
+    try:
         files = os.listdir('./static/poster/')
-        return render_template('gdownfile.html', files = files)
+        if session['username'] == 'admin':
+            myfiles = os.listdir('./static/poster/')
+            return render_template('gdownfile.html', files = files, myfiles = myfiles)
+        else:
+            return('접근 권한이 없습니다.')
+    except:
+        return redirect(url_for('defalut'))
 
 @app.route("/gdeletefile", methods = ['POST'])
 def gdeletefile():
-    if request.method == 'POST':
-        if session['logged_in'] == True:
-            name = request.form['radio']
-            path = './static/poster/'
-            os.remove(path + name)
-            files = os.listdir('./static/poster/')
-            myfiles = os.listdir('./static/poster/')
-            result = '%s' % escape(session['name'])
-            return render_template('gdeleted.html', files = files, showname = result, myfiles = myfiles)
-        return redirect(url_for('login'))
-    else :
-        return render_template('main.html')
-
+    try:
+        if request.method == 'POST':
+            if session['logged_in'] == True:
+                name = request.form['radio']
+                path = './static/poster/'
+                os.remove(path + name)
+                files = os.listdir('./static/poster/')
+                myfiles = os.listdir('./static/poster/')
+                result = '%s' % escape(session['name'])
+                return render_template('gdeleted.html', files = files, showname = result, myfiles = myfiles)
+            return redirect(url_for('login'))
+        else :
+            return render_template('main.html')
+    except:
+        return redirect(url_for('defalut'))
 #patch
 @app.route("/patch")
 def patch():
     return render_template('patch.html')
 
-#404 
-@app.errorhandler(404)
-def page_not_found(error):
-	return render_template('nopage.html'), 404
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -423,6 +460,7 @@ def logout():
     return redirect(url_for('defalut'))
     
 if __name__ == '__main__':
-	db.create_all()
-	app.secret_key = "123123123"
-	app.run(host='0.0.0.0', port=80, debug=True)
+    db.create_all()
+    rd = str(randint(100, 1000000))
+    app.secret_key = rd
+    app.run(host='0.0.0.0', port=80, debug=True)

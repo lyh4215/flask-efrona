@@ -33,7 +33,6 @@
         {% block content %}
         {% endblock %}
         <h2>파일 리스트</h2>
-        {% if session['logged_in'] %}
         <h3>{{showname}}님의 개인 저장소</h3>
         <form action = {{url_for('download')}} method = "POST"
             enctype="multipart/form-data">
@@ -41,26 +40,11 @@
                 {% for n in myfiles %}
                 <li class = "list" style ="margin-bottom : 10px;">
                     <input type = "radio" value = {{n}} name = "radio">
-                    <input type = "submit" value = {{n}} name = "file" formaction="/fileDown"/>
+                    <input type = "submit" value = {{n}} name = "file" formaction="/gfileDown"/>
                 </li>
                 {% endfor %}
             </ul>
-            <input type = "submit" value = "delete" name = "file"  formaction="/deletefile"/>
-        </form>
-        {% else %}
-        <form action = {{url_for('login')}}>
-            <h4 style = "display : inline-block;">개인 저장소에 있는 걸 다운로드하려면?</h4>
-            <input style = "display : inline-block;" type = "submit" value = "로그인하기" />
-         </form>
-        {% endif %}
-        <h3>공용 저장소</h3>
-        <form action = {{url_for('download')}} method = "POST"
-            enctype="multipart/form-data">
-            <ul>
-                {% for n in files %}
-                <li class = "list" style ="margin-bottom : 10px;"><input type = "submit" value = {{n}} name = "file"></li>
-                {% endfor %}
-            </ul>
+            <input type = "submit" value = "delete" name = "file"  formaction="/gdeletefile"/>
         </form>
     </main>
     <nav style = "width : 210px; margin:0;">
