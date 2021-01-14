@@ -1,5 +1,5 @@
 #-*- coding:utf-8 -*- 
-from flask import Flask, render_template, request, escape, send_file, url_for, session, redirect, app, send_from_directory
+from flask import Flask, render_template, request, escape, send_file, url_for, session, redirect, app, Response, send_from_directory
 from werkzeug.utils import secure_filename
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
