@@ -467,4 +467,4 @@ if __name__ == '__main__':
     db.create_all()
     rd = str(randint(100, 1000000))
     app.secret_key = rd
-    app.run(host='0.0.0.0', port=80, debug=True)
+    app.run(host='0.0.0.0', port=80,  Threaded=True, debug=True)
