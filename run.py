@@ -133,7 +133,7 @@ def test():
 def abc(name):
     print (name)
     print (escape(name))
-    return ('%s and %s' %name %escape(name))
+    return (name)
 
 @app.route("/mypage")
 def mypage():
