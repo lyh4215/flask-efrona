@@ -133,7 +133,6 @@ def test():
 def abc(name):
     print (name)
     print (escape(name))
-    print (escape(name).decode("utf-8"))
 
 @app.route("/mypage")
 def mypage():
