@@ -129,6 +129,12 @@ def test():
     except:
         return redirect(url_for('defalut'))
 
+@app.route("/abc/<name>")
+def abc(name):
+    print (name)
+    print (escape(name))
+    print (escape(name).decode("utf-8"))
+
 @app.route("/mypage")
 def mypage():
     try:
