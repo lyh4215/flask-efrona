@@ -131,9 +131,7 @@ def test():
 
 @app.route("/abc/<name>")
 def abc(name):
-    print (name)
-    print (escape(name))
-    return (name)
+    return (escape(name))
 
 @app.route("/mypage")
 def mypage():
