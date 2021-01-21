@@ -129,9 +129,6 @@ def test():
     except:
         return redirect(url_for('defalut'))
 
-@app.route("/abc/<name>")
-def abc(name):
-    return (escape(name))
 
 @app.route("/mypage")
 def mypage():
