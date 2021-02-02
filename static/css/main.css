@@ -216,3 +216,26 @@ a{
     background-position: -59px 0px;
     width: 27px;
 }
+.mysite{
+    margin:0 auto;
+    padding:0;
+    list-style: none;
+    width: 300px;
+    display: inline-flex;
+}
+.mysite h3 {
+    margin: 30px 0px 0px 0px;
+    border-radius: 20px;
+    border: 3px solid white;
+    box-shadow: 0px 3px 10px rgb(0 0 0 / 30%);
+    text-align: center;
+    width: 300px;
+    height: 68px;
+    /* display: inline-block; */
+    background-color: white;
+    font-size: 43px;
+    white-space: nowrap;
+}
+li {
+    margin: 0px 20px 0px 20px;
+}
